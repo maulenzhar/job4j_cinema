@@ -1,4 +1,4 @@
-package ru.job4j.cinema.repository.test;
+package ru.job4j.cinema.controller;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeAll;
 import ru.job4j.cinema.repository.impl.Sql2oHallRepository;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Properties;
 

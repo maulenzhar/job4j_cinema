@@ -17,14 +17,6 @@
     <div class="container  align-content-center">
         <h2 class="mt-5">Сеансы</h2>
 
-        <div th:if="${success}" class="alert alert-success mt-5" role="alert">
-            <p th:text="'Вы успешно приобрели билет на место ' + ${success.placeNumber} + '!'"> </p>
-        </div>
-
-        <div th:if="${error}" class="alert alert-danger mt-5" role="alert">
-            <p>Не удалось приобрести билет на заданное место. Вероятно оно уже занято. Попробуйте снова!</p>
-        </div>
-
         <table class="table">
             <thead>
             <tr>

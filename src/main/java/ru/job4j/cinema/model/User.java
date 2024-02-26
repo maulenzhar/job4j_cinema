@@ -67,7 +67,7 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return id == user.id;
+        return email == user.email;
     }
 
     @Override

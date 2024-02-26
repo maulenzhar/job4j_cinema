@@ -2,11 +2,13 @@ package ru.job4j.cinema.repository.impl;
 
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
+import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.repository.TicketRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 public class Sql2oTicketRepository implements TicketRepository {
@@ -18,7 +20,7 @@ public class Sql2oTicketRepository implements TicketRepository {
     }
 
     @Override
-    public Ticket save(Ticket ticket) {
+    public Optional<Ticket> save(Ticket ticket) {
         try (var connection = sql2o.open()) {
             var sql = """
                       INSERT INTO tickets(session_id, row_number, place_number, user_id)
@@ -31,7 +33,7 @@ public class Sql2oTicketRepository implements TicketRepository {
                     .addParameter("userId", ticket.getUserId());
             int generatedId = query.executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
-            return ticket;
+            return Optional.ofNullable(ticket);
         }
     }
 

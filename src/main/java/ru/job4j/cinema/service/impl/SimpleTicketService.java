@@ -7,6 +7,7 @@ import ru.job4j.cinema.service.TicketService;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SimpleTicketService implements TicketService {
@@ -17,11 +18,11 @@ public class SimpleTicketService implements TicketService {
     }
 
     @Override
-    public Ticket save(Ticket ticket) {
+    public Optional<Ticket> save(Ticket ticket) {
         for (Ticket currentTicket : findAll()) {
             if (ticket.getRowNumber() == currentTicket.getRowNumber()
                     && ticket.getPlaceNumber() == currentTicket.getPlaceNumber()) {
-                return null;
+                return Optional.empty();
             }
         }
         return ticketRepository.save(ticket);
