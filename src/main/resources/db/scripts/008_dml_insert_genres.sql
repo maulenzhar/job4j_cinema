@@ -1,7 +1,7 @@
-insert into genres(name) values('Боевик');
-insert into genres(name) values('Комедия');
-insert into genres(name) values('Ужас');
-insert into genres(name) values('Фантастика');
-insert into genres(name) values('Триллер');
-insert into genres(name) values('Мелодрама');
-insert into genres(name) values('Детектив');
+insert into genres(name) values('Боевик') ON CONFLICT DO NOTHING;
+insert into genres(name) values('Комедия') ON CONFLICT DO NOTHING;
+insert into genres(name) values('Ужас') ON CONFLICT DO NOTHING;
+insert into genres(name) values('Фантастика') ON CONFLICT DO NOTHING;
+insert into genres(name) values('Триллер') ON CONFLICT DO NOTHING;
+insert into genres(name) values('Мелодрама') ON CONFLICT DO NOTHING;
+insert into genres(name) values('Детектив') ON CONFLICT DO NOTHING;
