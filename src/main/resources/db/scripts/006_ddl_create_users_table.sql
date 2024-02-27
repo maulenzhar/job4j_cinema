@@ -1,4 +1,4 @@
-create table users
+create table IF NOT EXISTS users
 (
     id        serial primary key,
     full_name varchar        not null,
