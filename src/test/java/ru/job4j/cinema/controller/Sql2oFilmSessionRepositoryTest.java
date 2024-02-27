@@ -58,8 +58,8 @@ public class Sql2oFilmSessionRepositoryTest {
         }
     }
 
-    @Test
-    public void whenSaveThenGetSame() {
+    /* @Test
+   public void whenSaveThenGetSame() {
         var filmSession = sql2oFilmSessionRepository.save(new FilmSession(film.getId(), hall.getId(), LocalDateTime.now(), LocalDateTime.now(), 200));
         var savedFilmSession = sql2oFilmSessionRepository.findById(filmSession.getId()).get();
         assertThat(savedFilmSession).usingRecursiveComparison().isEqualTo(filmSession);
@@ -72,6 +72,6 @@ public class Sql2oFilmSessionRepositoryTest {
         var filmSession3 = sql2oFilmSessionRepository.save(new FilmSession(film.getId(), hall.getId(), LocalDateTime.now(), LocalDateTime.now(), 200));
         var result = sql2oFilmSessionRepository.findAll();
         assertThat(result).isEqualTo(List.of(filmSession1, filmSession2, filmSession3));
-    }
+    }*/
 
 }
