@@ -1,4 +1,4 @@
-package ru.job4j.cinema.controller;
+package ru.job4j.cinema.repository.impl;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -6,16 +6,14 @@ import ru.job4j.cinema.configuration.DatasourceConfiguration;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.model.Hall;
-import ru.job4j.cinema.repository.impl.Sql2oFilmRepository;
-import ru.job4j.cinema.repository.impl.Sql2oFilmSessionRepository;
 import org.junit.jupiter.api.BeforeAll;
-import ru.job4j.cinema.repository.impl.Sql2oHallRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Properties;
 
-import static java.time.LocalDateTime.now;
+import static java.util.Collections.emptyList;
+import static java.util.Optional.empty;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Sql2oFilmSessionRepositoryTest {
@@ -58,7 +56,7 @@ public class Sql2oFilmSessionRepositoryTest {
         }
     }
 
-    /* @Test
+    @Test
    public void whenSaveThenGetSame() {
         var filmSession = sql2oFilmSessionRepository.save(new FilmSession(film.getId(), hall.getId(), LocalDateTime.now(), LocalDateTime.now(), 200));
         var savedFilmSession = sql2oFilmSessionRepository.findById(filmSession.getId()).get();
@@ -72,6 +70,32 @@ public class Sql2oFilmSessionRepositoryTest {
         var filmSession3 = sql2oFilmSessionRepository.save(new FilmSession(film.getId(), hall.getId(), LocalDateTime.now(), LocalDateTime.now(), 200));
         var result = sql2oFilmSessionRepository.findAll();
         assertThat(result).isEqualTo(List.of(filmSession1, filmSession2, filmSession3));
-    }*/
+    }
 
+    @Test
+    public void whenDeleteById() {
+        var filmSession = sql2oFilmSessionRepository.save(new FilmSession(film.getId(), hall.getId(), LocalDateTime.now(), LocalDateTime.now(), 200));
+        var result = sql2oFilmSessionRepository.deleteById(filmSession.getId());
+        assertThat(result).isEqualTo(true);
+    }
+
+    @Test
+    public void whenDontSaveThenNothingFound() {
+        assertThat(sql2oFilmSessionRepository.findAll()).isEqualTo(emptyList());
+        assertThat(sql2oFilmSessionRepository.findById(0)).isEqualTo(empty());
+    }
+
+    @Test
+    public void whenDeleteThenGetEmptyOptional() {
+        var filmSession = sql2oFilmSessionRepository.save(new FilmSession(film.getId(), hall.getId(), LocalDateTime.now(), LocalDateTime.now(), 200));
+        var isDeleted = sql2oFilmSessionRepository.deleteById(filmSession.getId());
+        var savedFilmSession = sql2oFilmSessionRepository.findById(filmSession.getId());
+        assertThat(isDeleted).isTrue();
+        assertThat(savedFilmSession).isEqualTo(empty());
+    }
+
+    @Test
+    public void whenDeleteByInvalidIdThenGetFalse() {
+        assertThat(sql2oFilmSessionRepository.deleteById(0)).isFalse();
+    }
 }
