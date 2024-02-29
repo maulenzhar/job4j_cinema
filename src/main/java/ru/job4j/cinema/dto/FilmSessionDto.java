@@ -1,5 +1,6 @@
 package ru.job4j.cinema.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.job4j.cinema.model.FilmSession;
 import ru.job4j.cinema.model.Hall;
 
@@ -9,7 +10,9 @@ public class FilmSessionDto implements Comparable<FilmSessionDto> {
     private int id;
     private FilmDto film;
     private Hall hall;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;
     private int price;
 
