@@ -9,6 +9,7 @@ import ru.job4j.cinema.model.Hall;
 import org.junit.jupiter.api.BeforeAll;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 import java.util.Properties;
 
@@ -58,7 +59,7 @@ public class Sql2oFilmSessionRepositoryTest {
 
     @Test
    public void whenSaveThenGetSame() {
-        var filmSession = sql2oFilmSessionRepository.save(new FilmSession(film.getId(), hall.getId(), LocalDateTime.now(), LocalDateTime.now(), 200));
+        var filmSession = sql2oFilmSessionRepository.save(new FilmSession(film.getId(), hall.getId(), LocalDateTime.of(2024, Month.FEBRUARY,3,6,30,40,50000), LocalDateTime.of(2023,Month.FEBRUARY,4,6,30,40,50000), 200));
         var savedFilmSession = sql2oFilmSessionRepository.findById(filmSession.getId()).get();
         assertThat(savedFilmSession).usingRecursiveComparison().isEqualTo(filmSession);
     }
