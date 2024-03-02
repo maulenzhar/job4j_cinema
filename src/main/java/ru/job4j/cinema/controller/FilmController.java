@@ -10,6 +10,7 @@ import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.service.FilmService;
 import ru.job4j.cinema.service.GenreService;
 
+import java.io.IOException;
 import java.util.Collection;
 
 @Controller
@@ -38,13 +39,8 @@ public class FilmController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Film film, @RequestParam MultipartFile file, Model model) {
-        try {
-            filmService.save(film, new FileDto(file.getOriginalFilename(), file.getBytes()));
-            return "redirect:/films";
-        } catch (Exception exception) {
-            model.addAttribute("message", exception.getMessage());
-            return "errors/404";
-        }
+    public String create(@ModelAttribute Film film, @RequestParam MultipartFile file) throws IOException {
+        filmService.save(film, new FileDto(file.getOriginalFilename(), file.getBytes()));
+        return "redirect:/films";
     }
 }
